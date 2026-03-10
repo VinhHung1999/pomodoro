@@ -1,0 +1,47 @@
+{
+  "name": "pomodo",
+  "version": "1.0.0",
+  "description": "Pomodoro Clock - A minimal desktop timer app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac",
+    "build:all": "electron-builder --mac --win",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "author": "",
+  "license": "MIT",
+  "build": {
+    "appId": "com.pomodo.app",
+    "productName": "Pomodo",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns",
+      "target": ["dmg", "zip"],
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Pomodo needs microphone access for voice commands to control your Kanban board."
+      }
+    },
+    "win": {
+      "icon": "build/icon.png",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "node_modules/ws/**/*"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.8.1"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}

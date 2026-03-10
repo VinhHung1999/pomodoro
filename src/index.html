@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="titlebar">
+    <div class="titlebar-buttons">
+      <button id="btn-voice" class="titlebar-btn" title="Voice command (Ctrl+Option+Cmd)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+      <button id="btn-pin" class="titlebar-btn" title="Always on top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L12 12"/><path d="M18 8L18 12C18 15.31 15.31 18 12 18C8.69 18 6 15.31 6 12L6 8"/><path d="M12 18L12 22"/>
+        </svg>
+      </button>
+      <button id="btn-settings" class="titlebar-btn" title="Settings">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="mode-selector">
+      <button class="mode-btn active" data-mode="pomodoro">Pomodoro</button>
+      <button class="mode-btn" data-mode="shortBreak">Short Break</button>
+      <button class="mode-btn" data-mode="longBreak">Long Break</button>
+    </div>
+
+    <div class="timer-bar-section">
+      <div class="timer-display">
+        <span id="minutes">25</span>:<span id="seconds">00</span>
+      </div>
+      <div class="timer-bar">
+        <div class="timer-bar-fill" id="timer-bar-fill"></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btn-reset" class="ctrl-btn" title="Reset">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+        </svg>
+      </button>
+      <button id="btn-start" class="ctrl-btn primary">Start</button>
+      <button id="btn-skip" class="ctrl-btn" title="Skip">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="counter">
+      <span id="pomodoro-count">0</span> pomodoros completed
+      <button id="btn-restart" class="restart-btn" title="Restart all">Restart</button>
+    </div>
+  </div>
+
+  <!-- Kanban Section -->
+  <div id="kanban-section" class="kanban-section hidden">
+    <div class="kanban-header">
+      <span class="kanban-title">Kanban</span>
+      <div class="kanban-actions">
+        <button id="btn-create-kanban" class="kanban-action-btn" title="Create new kanban">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <button id="btn-pick-file" class="kanban-action-btn" title="Choose kanban file">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </button>
+        <button id="btn-refresh-kanban" class="kanban-action-btn" title="Refresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+        </button>
+        <button id="btn-kanban-collapse" class="kanban-action-btn" title="Collapse kanban">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="kanban-content" class="kanban-content">
+      <div class="kanban-empty">No file selected. Click the file icon to pick a kanban markdown file.</div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-overlay" class="settings-overlay hidden">
+    <div class="settings-modal">
+      <div class="settings-header">
+        <span>Settings</span>
+        <button id="btn-settings-close" class="settings-close">&times;</button>
+      </div>
+      <div class="settings-body">
+        <label class="settings-label">Soniox API Key</label>
+        <input id="input-soniox-key" type="password" class="settings-input" placeholder="Enter Soniox API key" />
+        <label class="settings-label">xAI API Key</label>
+        <input id="input-xai-key" type="password" class="settings-input" placeholder="Enter xAI API key" />
+        <label class="settings-label">Kanban File</label>
+        <div class="settings-file-row">
+          <input id="input-kanban-path" type="text" class="settings-input" placeholder="No file selected" readonly />
+          <button id="btn-settings-pick-file" class="settings-pick-btn">Browse</button>
+        </div>
+        <label class="settings-label">Voice Shortcut</label>
+        <input id="input-voice-shortcut" type="text" class="settings-input" placeholder="Control+Option+V" />
+      </div>
+      <div class="settings-footer">
+        <button id="btn-settings-save" class="settings-save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voice status indicator -->
+  <div id="voice-status" class="voice-status hidden"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
